@@ -19,10 +19,6 @@ export const ChannelImgContainer = styled.div`
     max-width: 250px;
     margin-right: 20px;
   }
-  @media screen and (min-width: 768px) {
-    max-width: 350px;
-    margin-right: 20px;
-  }
 `
 
 export const ChannelImg = styled.img`

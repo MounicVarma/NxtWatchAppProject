@@ -40,7 +40,7 @@ const videoStatusConstant = {
 
 class Home extends Component {
   state = {
-    showBanner: true,
+    showBanner: 'flex',
     searchValue: '',
     apiStatus: videoStatusConstant.initial,
     videosList: [],
@@ -57,6 +57,7 @@ class Home extends Component {
     const {searchValue} = this.state
     const jwtToken = Cookies.get('jwt_token')
     const url = `https://apis.ccbp.in/videos/all?search=${searchValue}`
+    console.log(url)
     const options = {
       method: 'GET',
       headers: {
@@ -90,7 +91,7 @@ class Home extends Component {
 
   closePremiumBanner = () => {
     this.setState({
-      showBanner: false,
+      showBanner: 'none',
     })
   }
 
@@ -119,32 +120,37 @@ class Home extends Component {
     )
   }
 
-  renderPremiumBanner = () => (
-    <PremiumBannerContainer data-testid="banner">
-      <PremiumBannerCard>
-        <NxtWatchLightLogo1
-          src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
-          alt="nxt watch logo"
-        />
-        <PremiumBannerPara>
-          Buy Nxt Watch Premium prepaid plans with UPI
-        </PremiumBannerPara>
-        <PremiumBannerGetItNowButton type="button">
-          GET IT NOW
-        </PremiumBannerGetItNowButton>
-      </PremiumBannerCard>
-      <PremiumBannerCloseButton
-        type="button"
-        onClick={this.closePremiumBanner}
-        data-testid="close"
-      >
-        <RiCloseLineIcon />
-      </PremiumBannerCloseButton>
-    </PremiumBannerContainer>
-  )
+  renderPremiumBanner = () => {
+    const {showBanner} = this.state
+    const display = showBanner === 'flex' ? 'flex' : 'none'
+    return (
+      <PremiumBannerContainer display={display} data-testid="banner">
+        <PremiumBannerCard>
+          <NxtWatchLightLogo1
+            src="https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png"
+            alt="nxt watch logo"
+          />
+          <PremiumBannerPara as="p">
+            Buy Nxt Watch Premium prepaid plans with UPI
+          </PremiumBannerPara>
+          <PremiumBannerGetItNowButton type="button">
+            GET IT NOW
+          </PremiumBannerGetItNowButton>
+        </PremiumBannerCard>
+        <PremiumBannerCloseButton
+          type="button"
+          onClick={this.closePremiumBanner}
+          data-testid="close"
+        >
+          <RiCloseLineIcon />
+        </PremiumBannerCloseButton>
+      </PremiumBannerContainer>
+    )
+  }
 
   renderSuccessView = isDarkTheme => {
     const {videosList} = this.state
+    console.log(videosList)
     const color = isDarkTheme ? '#ffffff' : '#1e293b'
     const color1 = isDarkTheme ? '#616e7c' : '#00306e'
     if (videosList.length === 0) {
@@ -196,14 +202,14 @@ class Home extends Component {
       case videoStatusConstant.success:
         return this.renderSuccessView(isDarkTheme)
       case videoStatusConstant.failure:
-        return this.renderFailureView(isDarkTheme)
+        return this.renderFailureView()
       default:
         return null
     }
   }
 
   render() {
-    const {showBanner, searchValue} = this.state
+    const {searchValue} = this.state
     return (
       <NxtWatchContext.Consumer>
         {value => {
@@ -217,8 +223,8 @@ class Home extends Component {
               <Navbar />
               <HomeContainer bgColor1={bgColor1} bgColor={bgColor}>
                 <Sidebar />
-                <HomeSearchResultContainer data-testid="home" bgColor={bgColor}>
-                  {showBanner && this.renderPremiumBanner()}
+                <HomeSearchResultContainer bgColor={bgColor}>
+                  {this.renderPremiumBanner()}
                   <HomeSearchResultCard>
                     <SearchContainer>
                       <SearchInput

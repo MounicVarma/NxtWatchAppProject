@@ -41,7 +41,7 @@ const SearchVideoItem = props => {
                   <Description color={color}>{title}</Description>
                   <DescriptionCard>
                     <Para isDarkTheme={isDarkTheme}>
-                      {channel.name} * {viewCount} views * {publishedDate}
+                      {channel.name} * {viewCount} views * {publishedAt}
                     </Para>
                   </DescriptionCard>
                 </DescriptionContainer>

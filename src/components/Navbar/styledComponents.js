@@ -8,7 +8,7 @@ import {AiFillHome, AiFillFire} from 'react-icons/ai'
 import {SiYoutubegaming} from 'react-icons/si'
 import {MdPlaylistAdd} from 'react-icons/md'
 
-export const NavbarBgContainer = styled.div`
+export const NavbarBgContainer = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;

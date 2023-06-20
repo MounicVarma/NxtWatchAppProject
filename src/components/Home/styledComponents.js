@@ -22,7 +22,7 @@ export const HomeSearchResultContainer = styled.div`
   background-color: transparent;
 `
 export const PremiumBannerContainer = styled.div`
-  display: flex;
+  display: ${props => props.display};
   justify-content: space-between;
   background-image: url('https://assets.ccbp.in/frontend/react-js/nxt-watch-banner-bg.png');
   background-size: cover;

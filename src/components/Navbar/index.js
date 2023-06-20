@@ -42,10 +42,12 @@ const Navbar = props => {
     const {history} = props
     history.replace('/login')
   }
+  const {match} = props
+  const {path} = match
   return (
     <NxtWatchContext.Consumer>
       {value => {
-        const {isDarkTheme, activeTab, changeTheme, changeActiveTab} = value
+        const {isDarkTheme, changeTheme} = value
         const bgColor = isDarkTheme ? '#0f0f0f' : '#f4f4f4'
         const textColor = isDarkTheme ? '#f9f9f9' : '#181818'
         const websiteLogo = isDarkTheme
@@ -58,27 +60,11 @@ const Navbar = props => {
         const onClickChangeTheme = () => {
           changeTheme()
         }
-        const onClickChangeHomeTab = () => {
-          changeActiveTab('HOME')
-        }
-        const onClickChangeTrendingTab = () => {
-          changeActiveTab('TRENDING')
-        }
-        const onClickChangeGamingTab = () => {
-          changeActiveTab('GAMING')
-        }
-        const onClickChangeSavedVideosTab = () => {
-          changeActiveTab('SAVED VIDEOS')
-        }
 
         return (
           <NavbarBgContainer bgColor={bgColor}>
             <NavLink to="/">
-              <NavbarNxtWatchLogo
-                onClick={onClickChangeHomeTab}
-                src={websiteLogo}
-                alt="website logo"
-              />
+              <NavbarNxtWatchLogo src={websiteLogo} alt="website logo" />
             </NavLink>
             <NavbarUnOrderedListMobileContainer>
               <NavbarListItem>
@@ -118,23 +104,20 @@ const Navbar = props => {
                         <NavLink to="/" onClick={() => close()}>
                           <MobileMenuListItems
                             isActive={
-                              activeTab === 'HOME' ? {listColor} : 'transparent'
+                              path === '/' ? {listColor} : 'transparent'
                             }
-                            onClick={onClickChangeHomeTab}
                           >
                             <ControlContainer>
                               <AiFillHomeIcon
                                 isactive={
-                                  activeTab === 'HOME'
+                                  path === '/'
                                     ? {iconColor}
                                     : {iconColor: '#909090'}
                                 }
                               />
                               <MobileMenuPara
                                 isActive={
-                                  activeTab === 'HOME'
-                                    ? {color}
-                                    : {color: '#909090'}
+                                  path === '/' ? {color} : {color: '#909090'}
                                 }
                               >
                                 Home
@@ -145,23 +128,20 @@ const Navbar = props => {
                         <NavLink to="/trending" onClick={() => close()}>
                           <MobileMenuListItems
                             isActive={
-                              activeTab === 'TRENDING'
-                                ? {listColor}
-                                : 'transparent'
+                              path === '/trending' ? {listColor} : 'transparent'
                             }
-                            onClick={onClickChangeTrendingTab}
                           >
                             <ControlContainer>
                               <AiFillFireIcon
                                 isactive={
-                                  activeTab === 'TRENDING'
+                                  path === '/trending'
                                     ? {iconColor}
                                     : {iconColor: '#909090'}
                                 }
                               />
                               <MobileMenuPara
                                 isActive={
-                                  activeTab === 'TRENDING'
+                                  path === '/trending'
                                     ? {color}
                                     : {color: '#909090'}
                                 }
@@ -174,23 +154,20 @@ const Navbar = props => {
                         <NavLink to="/gaming" onClick={() => close()}>
                           <MobileMenuListItems
                             isActive={
-                              activeTab === 'GAMING'
-                                ? {listColor}
-                                : 'transparent'
+                              path === '/gaming' ? {listColor} : 'transparent'
                             }
-                            onClick={onClickChangeGamingTab}
                           >
                             <ControlContainer>
                               <SiYoutubegamingIcon
                                 isactive={
-                                  activeTab === 'GAMING'
+                                  path === '/gaming'
                                     ? {iconColor}
                                     : {iconColor: '#909090'}
                                 }
                               />
                               <MobileMenuPara
                                 isActive={
-                                  activeTab === 'GAMING'
+                                  path === '/gaming'
                                     ? {color}
                                     : {color: '#909090'}
                                 }
@@ -203,23 +180,22 @@ const Navbar = props => {
                         <NavLink to="/saved-videos" onClick={() => close()}>
                           <MobileMenuListItems
                             isActive={
-                              activeTab === 'SAVED VIDEOS'
+                              path === '/saved-videos'
                                 ? {listColor}
                                 : 'transparent'
                             }
-                            onClick={onClickChangeSavedVideosTab}
                           >
                             <ControlContainer>
                               <MdPlaylistAddIcon
                                 isactive={
-                                  activeTab === 'SAVED VIDEOS'
+                                  path === '/saved-videos'
                                     ? {iconColor}
                                     : {iconColor: '#909090'}
                                 }
                               />
                               <MobileMenuPara
                                 isActive={
-                                  activeTab === 'SAVED VIDEOS'
+                                  path === '/saved-videos'
                                     ? {color}
                                     : {color: '#909090'}
                                 }

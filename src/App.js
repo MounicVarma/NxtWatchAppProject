@@ -15,7 +15,6 @@ import './App.css'
 class App extends Component {
   state = {
     isDarkTheme: false,
-    activeTab: 'HOME',
     savedVideos: [],
   }
 
@@ -23,12 +22,6 @@ class App extends Component {
     this.setState(pervState => ({
       isDarkTheme: !pervState.isDarkTheme,
     }))
-  }
-
-  changeActiveTab = id => {
-    this.setState({
-      activeTab: id,
-    })
   }
 
   addSavedVideo = specificVideo => {
@@ -58,7 +51,6 @@ class App extends Component {
           activeTab,
           savedVideos,
           changeTheme: this.changeTheme,
-          changeActiveTab: this.changeActiveTab,
           addSavedVideo: this.addSavedVideo,
         }}
       >
